@@ -1,0 +1,18 @@
+$font-size: 2rem;
+$entry-padding: .5rem;
+
+.Nav-Bar {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #000000aa;
+    height: calc($font-size + (2 * $entry-padding));
+    font-size: $font-size;
+}
+
+.Nav-Entry {
+        color: white;
+        text-decoration: none;
+        padding: .5rem
+
+    // padding: .5rem;
+}
