@@ -13,7 +13,6 @@ interface AppState {
 
 class App extends React.Component<{}, AppState> {
   addPage = (relativeLink: string, pageData: PageData) => {
-    console.log(this.state);
     let pages = this.state.pageManager.pages;
     pages[relativeLink] = pageData;
     this.setState({
@@ -48,8 +47,6 @@ class App extends React.Component<{}, AppState> {
         addPage: this.addPage,
       }
     }
-
-    console.log(this.state);
   }
 
   
