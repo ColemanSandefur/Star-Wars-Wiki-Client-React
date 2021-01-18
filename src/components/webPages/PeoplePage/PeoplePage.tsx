@@ -15,7 +15,7 @@ export const PageData: CategoryPageData = {
     }
 }
 
-interface PeoplePageProps {
+interface PeoplePageProps extends RouteComponentProps<{id?: any}> {
     displayedId?: number
 }
 
@@ -23,12 +23,12 @@ interface PeoplePageState {
     
 }
 
-export default class PeoplePage extends React.Component<PeoplePageProps & RouteComponentProps<{id?: any}>, PeoplePageState> {
+export default class PeoplePage extends React.Component<PeoplePageProps, PeoplePageState> {
     changePage = (id: number) => {
         this.props.history.push(`${PageData.basePath}/${id}`);
     }
 
-    constructor(props: PeoplePageProps & RouteComponentProps<{id?: any}>) {
+    constructor(props: PeoplePageProps) {
         super(props)
 
         this.state = {

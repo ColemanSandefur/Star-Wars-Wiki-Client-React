@@ -28,7 +28,7 @@ export default class PlanetPage extends React.Component<PlanetPageProps, PlanetP
         this.props.history.push(`${PageData.basePath}/${id}`);
     }
 
-    constructor(props: PlanetPageProps & RouteComponentProps<{id?: any}>) {
+    constructor(props: PlanetPageProps) {
         super(props)
 
         this.state = {
