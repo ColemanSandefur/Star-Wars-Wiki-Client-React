@@ -1,4 +1,5 @@
 import { DocumentNode, useQuery } from "@apollo/client";
+import "./ListCategory.scss";
 
 interface Data {
     name?: string,
@@ -26,15 +27,19 @@ export default function ListCategory<D extends ListCategoryDataBase, V>(props: L
 
     const formatted = Reflect.get(data, Object.keys(data)[0]).map((data: Data) => {
         if (data.name !== undefined) {
-            return <li key={`${data.name}`} onClick={() => props.onClick(data.id)}>{data.name}</li>
-        } else {
-            return <li key={`${data.title}`} onClick={() => props.onClick(data.id)}>{data.title}</li>
+            return <CategoryEntry onClick={props.onClick} id={data.id} text={data.name}/>
+        } else if (data.title !== undefined) {
+            return <CategoryEntry onClick={props.onClick} id={data.id} text={data.title}/>
         }
     })
 
     return (
-        <ul>
+        <ul className="All-Categories">
             {formatted}
         </ul>
     )
+}
+
+function CategoryEntry(props: {onClick: (id: number) => void, id: number, text: string}) {
+    return <li key={`${props.id}`}><span onClick={() => props.onClick(props.id)}>{props.text}</span></li>
 }

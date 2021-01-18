@@ -1,13 +1,18 @@
 import React from "react";
-import * as PeoplePage from "./PeoplePage/PeoplePage"
-import * as PlanetPage from "./PlanetsPage/PlanetsPage"
-import "./WebPage.scss"
+import "./WebPage.scss";
 import {
     BrowserRouter as Router,
     Switch,
     Route,
     RouteComponentProps
 } from "react-router-dom";
+
+import * as PeoplePage from "./PeoplePage/PeoplePage";
+import * as PlanetPage from "./PlanetsPage/PlanetsPage";
+import * as FilmsPage from "./FlimsPage/FilmsPage";
+import * as SpeciesPage from "./SpeciesPage/SpeciesPage";
+import * as VehiclesPage from "./VehiclesPage/VehiclesPage";
+import * as StarshipsPage from "./StarshipsPage/StarshipsPage";
 
 export interface PageData {
     name: string,
@@ -42,6 +47,10 @@ class WebPages extends React.Component<WebPagesProps> {
 
         this.addPage(PeoplePage.PageData);
         this.addPage(PlanetPage.PageData);
+        this.addPage(FilmsPage.PageData);
+        this.addPage(SpeciesPage.PageData);
+        this.addPage(VehiclesPage.PageData);
+        this.addPage(StarshipsPage.PageData);
     }
     
     render() {

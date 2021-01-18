@@ -1,0 +1,16 @@
+
+.All-Categories {
+    padding: 0;
+    li {
+        
+        margin: 1rem;
+
+        span {
+            background-color: #00000055;
+            padding: .25rem;
+            border-radius: 10px;
+            cursor: pointer;
+            display: inline-block;
+        }
+    }
+}
