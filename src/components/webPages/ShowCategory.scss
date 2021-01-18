@@ -11,4 +11,18 @@ div.Category {
         margin: 0;
         margin-bottom: 2rem;
     }
+
+    ul {
+        li {
+            span {
+                display: inline-block;
+                
+            }
+
+            &.Is-Link span{
+                cursor: pointer;
+                text-decoration: underline;
+            }
+        }
+    }
 }

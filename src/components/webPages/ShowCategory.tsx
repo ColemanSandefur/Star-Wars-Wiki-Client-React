@@ -99,17 +99,23 @@ function getRelativePath(link: string) {
   return link.replace("http://swapi.dev/api", "");
 }
 
+function CategoryEntry(key: any, text: string, className?: string, linkInfo?: {onClick: (url: string) => void, path:string}) {
+  return (
+    <li className={className} key={key}><span onClick={(url) => linkInfo?.onClick(linkInfo.path)}>{text}</span></li>
+  )
+}
+
 function createCategoryEntry(inputData: any[], changePage: (path: string) => void) {
   let tmpData: JSX.Element[] = []
 
   tmpData = inputData.map((data, index) => {
     if (isLink(data)) {
       return (
-        <li key={index} onClick={() => changePage(getRelativePath(data.url))}>{getDisplay(data)}</li>
+        CategoryEntry(index, getDisplay(data), "Is-Link", {onClick: changePage, path: getRelativePath(data.url)})
       )
     }
     return (
-      <li key={index}>{getDisplay(data)}</li>
+      CategoryEntry(index, getDisplay(data))
     )
   });
 
