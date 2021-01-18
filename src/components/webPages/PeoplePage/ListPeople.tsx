@@ -2,8 +2,8 @@ import React from "react";
 import { useQuery, gql } from '@apollo/client';
 
 const PERSON_QUERY = gql`
-  query GetPerson($id: ID){
-    person(id: $id){
+  query {
+    person{
       name,
       id
     }
@@ -22,10 +22,10 @@ interface GetPersonVars {
 }
 
 //'ListPeople' will list all the people that the server has
-export default function ListPeople(props: {id?: number, onClick:(id: number) => void}) {
+export default function ListPeople(props: {onClick:(id: number) => void}) {
     const { loading, data } = useQuery<GetPersonData, GetPersonVars>(
         PERSON_QUERY,
-        {variables: {id: props.id}}
+        {variables: {}}
     )
 
     if (loading) return <p>loading</p>
