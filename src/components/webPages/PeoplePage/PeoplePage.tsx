@@ -1,5 +1,4 @@
 import React from "react";
-// import "../WebPage.scss"
 import ListPeople from "./ListPeople"
 import ShowPerson from "./ShowPerson"
 import { CategoryPageData } from "../WebPage"
