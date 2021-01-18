@@ -1,6 +1,7 @@
 import React from "react";
 import * as PeoplePage from "./PeoplePage/PeoplePage"
 import * as PlanetPage from "./PlanetsPage/PlanetsPage"
+import "./WebPage.scss"
 import {
     BrowserRouter as Router,
     Switch,

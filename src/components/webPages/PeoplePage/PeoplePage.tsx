@@ -1,11 +1,20 @@
 import React from "react";
-import "./PeoplePage.scss"
+// import "../WebPage.scss"
 import ListPeople from "./ListPeople"
 import ShowPerson from "./ShowPerson"
 import { CategoryPageData } from "../WebPage"
 import {
     RouteComponentProps,
 } from "react-router-dom"
+
+export const PageData: CategoryPageData = {
+    name: "people",
+    path: "/people/:id?",
+    basePath: "/people",
+    render: (props) => {
+        return <PeoplePage {...props}/>
+    }
+}
 
 interface PeoplePageProps {
     displayedId?: number
@@ -17,7 +26,7 @@ interface PeoplePageState {
 
 export default class PeoplePage extends React.Component<PeoplePageProps & RouteComponentProps<{id?: any}>, PeoplePageState> {
     changePage = (id: number) => {
-        this.props.history.push(`/people/${id}`);
+        this.props.history.push(`${PageData.basePath}/${id}`);
     }
 
     constructor(props: PeoplePageProps & RouteComponentProps<{id?: any}>) {
@@ -45,11 +54,3 @@ export default class PeoplePage extends React.Component<PeoplePageProps & RouteC
     }
 }
 
-export const PageData: CategoryPageData = {
-    name: "people",
-    path: "/people/:id?",
-    basePath: "/people",
-    render: (props) => {
-        return <PeoplePage {...props}/>
-    }
-}
