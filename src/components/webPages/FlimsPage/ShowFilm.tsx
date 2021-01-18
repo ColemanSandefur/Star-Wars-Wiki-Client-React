@@ -14,22 +14,27 @@ const FILM_QUERY = gql`
       release_date,
       characters{
         name,
+        url,
         id
       },
       planets{
         name,
+        url,
         id
       },
       starships{
         name,
+        url,
         id
       },
       vehicles{
         name,
+        url,
         id
       },
       species{
         name,
+        url,
         id
       },
       created,
@@ -50,22 +55,27 @@ interface GetFilmData extends ShowCategoryProps.CategoryDataBase {
       release_date: string,
       characters:{
         name: string,
+        url: string
         id: number
       }[],
       planets:{
         name: string,
+        url: string,
         id: number
       }[],
       starships:{
         name: string,
+        url: string,
         id: number
       }[],
       vehicles:{
         name: string,
+        url: string,
         id: number
       }[],
       species:{
         name: string,
+        url: string,
         id: number
       }[],
       created: string,
@@ -79,6 +89,6 @@ interface GetFilmVars {
 	id: number
 }
 
-export default function ShowFilm(props: {id: number}) {
-  return <ShowCategory<GetFilmData, GetFilmVars> query={FILM_QUERY} showCategoryVars={{id: props.id}} />
+export default function ShowFilm(props: {id: number, changePage: (path: string) => void}) {
+  return <ShowCategory<GetFilmData, GetFilmVars> query={FILM_QUERY} showCategoryVars={{id: props.id}} changePage={props.changePage} />
 }

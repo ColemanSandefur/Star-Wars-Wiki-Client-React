@@ -6,11 +6,12 @@ export interface CategoryDataBase {
 
 interface ShowCategoryProps<V> {
   showCategoryVars: V,
-  query: DocumentNode
+  query: DocumentNode,
+  changePage: (path: string) => void
 }
 
-//Displays all the information I have about the specific person
-//'ShowPerson' will return all data ('Category' ex. name, vehicles, movies, etc.)
+//Displays all the information I have about the specific category
+//'ShowCategory' will return all data ('Category' ex. name, vehicles, movies, etc.)
 export default function ShowCategory<D extends CategoryDataBase, V>(props: ShowCategoryProps<V>) {
   /*
     Query graphQL
@@ -47,7 +48,7 @@ export default function ShowCategory<D extends CategoryDataBase, V>(props: ShowC
       continue
     }
 
-    categories.push(<Category key={categories.length} title={property} inputData={propVal} />)
+    categories.push(<Category key={categories.length} title={property} inputData={propVal} changePage={props.changePage}/>)
   }
   
   return (
@@ -82,11 +83,44 @@ export function getDisplay(inputData: any) {
   return JSON.stringify(inputData);
 }
 
+function getTitle(title: string) {
+  return title.replaceAll("_", " ");
+}
+
+function isLink(inputData: any) {
+  if (inputData.url !== undefined) {
+    return true;
+  }
+
+  return false;
+}
+
+function getRelativePath(link: string) {
+  return link.replace("http://swapi.dev/api", "");
+}
+
+function createCategoryEntry(inputData: any[], changePage: (path: string) => void) {
+  let tmpData: JSX.Element[] = []
+
+  tmpData = inputData.map((data, index) => {
+    if (isLink(data)) {
+      return (
+        <li key={index} onClick={() => changePage(getRelativePath(data.url))}>{getDisplay(data)}</li>
+      )
+    }
+    return (
+      <li key={index}>{getDisplay(data)}</li>
+    )
+  });
+
+  return tmpData;
+}
+
 //Categories are groups of information like:
 //  - vehicles they drove/owned
 //  - name
 //  - movies they were in
-export function Category(props: {title: string, inputData: any}) {
+export function Category(props: {title: string, inputData: any, changePage: (path: string) => void}) {
 
   //all data will end up in displayData
   let displayData;
@@ -95,13 +129,9 @@ export function Category(props: {title: string, inputData: any}) {
   let tmpData: JSX.Element[] = []
 
   if (Array.isArray(props.inputData)){
-    tmpData = props.inputData.map((data, index) => {
-      return (
-        <li key={index}>{getDisplay(data)}</li>
-      )
-    })
+    tmpData = createCategoryEntry(props.inputData, props.changePage);
   } else {
-    tmpData.push(<li key={0}>{getDisplay(props.inputData)}</li>);
+    tmpData = createCategoryEntry([props.inputData], props.changePage);
   }
 
   displayData = (
@@ -112,7 +142,7 @@ export function Category(props: {title: string, inputData: any}) {
 
   return (
     <div className={"Category"}>
-      <h3>{props.title}</h3>
+      <h3>{getTitle(props.title)}</h3>
       {displayData}
     </div>
   )

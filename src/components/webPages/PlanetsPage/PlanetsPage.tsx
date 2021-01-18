@@ -5,6 +5,7 @@ import ListPlanets from "./ListPlanets";
 import {
     RouteComponentProps,
 } from "react-router-dom"
+import CategoryPage from "../CategoryPage";
 
 export const PageData: CategoryPageData = {
     name: "planets",
@@ -19,36 +20,13 @@ interface PlanetPageProps extends RouteComponentProps<{id?: any}>{
     displayedId?: number
 }
 
-interface PlanetPageState {
-    
-}
-
-export default class PlanetPage extends React.Component<PlanetPageProps, PlanetPageState> {
-    changePage = (id: number) => {
-        this.props.history.push(`${PageData.basePath}/${id}`);
-    }
-
-    constructor(props: PlanetPageProps) {
-        super(props)
-
-        this.state = {
-            
-        }
-    }
-
-    render() {
-        let {id} =this.props.match.params
-        if (id !== undefined) {
-            return (
-                <div>
-                    <ShowPlanet id={id} />
-                </div>
-            )
-        }
-        return (
-            <div>
-                <ListPlanets onClick={this.changePage}/>
-            </div>
-        )
-    }
+export default function PlanetPage(props: PlanetPageProps) {
+    return <CategoryPage {...props} pageData={PageData} 
+        showCategory={(props, changePageURL, id) => {
+            return <ShowPlanet {...props} changePage={changePageURL} id={id}/>
+        }}
+        listCategory={(props, changePage) => {
+            return <ListPlanets {...{...props, onClick: changePage}} />
+        }}
+    />
 }

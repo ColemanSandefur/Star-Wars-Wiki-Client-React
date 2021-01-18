@@ -16,15 +16,18 @@ const SPECIES_QUERY = gql`
       average_lifespan,
       homeworld{
         name,
+        url,
         id
       },
       language,
       people{
         name,
+        url,
         id
       },
       films{
         title,
+        url,
         id
       },
       created,
@@ -47,15 +50,18 @@ interface GetSpeciesData extends ShowCategoryProps.CategoryDataBase {
       average_lifespan: string,
       homeworld:{
         name: string,
+        url: string,
         id: number
       }[],
       language: string,
       people:{
         name: string,
+        url: string,
         id: number
       }[],
       films:{
         title: string,
+        url: string,
         id: number
       }[],
       created: string,
@@ -69,6 +75,6 @@ interface GetSpeciesVars {
 	id: number
 }
 
-export default function ShowSpecies(props: {id: number}) {
-  return <ShowCategory<GetSpeciesData, GetSpeciesVars> query={SPECIES_QUERY} showCategoryVars={{id: props.id}} />
+export default function ShowSpecies(props: {id: number, changePage: (path: string) => void}) {
+  return <ShowCategory<GetSpeciesData, GetSpeciesVars> query={SPECIES_QUERY} showCategoryVars={{id: props.id}} {...props} />
 }

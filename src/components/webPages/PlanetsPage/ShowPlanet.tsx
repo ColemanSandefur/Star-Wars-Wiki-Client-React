@@ -17,10 +17,12 @@ const PLANET_QUERY = gql`
       population,
       residents{
           name,
+          url,
           id
       },
       films{
           title,
+          url,
           id
       },
       created,
@@ -44,10 +46,12 @@ interface GetPlanetData extends ShowCategoryProps.CategoryDataBase {
         population: string,
         residents: {
             name: string,
+            url: string,
             id: number
         }[],
         films: {
             title: string,
+            url: string,
             id: number
         }[],
         created: string,
@@ -61,6 +65,6 @@ interface GetPlanetVars {
 	id: number
 }
 
-export default function ShowPlanet(props: {id: number}) {
-  return <ShowCategory<GetPlanetData, GetPlanetVars> query={PLANET_QUERY} showCategoryVars={{id: props.id}} />
+export default function ShowPlanet(props: {id: number, changePage: (path: string) => void}) {
+  return <ShowCategory<GetPlanetData, GetPlanetVars> query={PLANET_QUERY} showCategoryVars={{id: props.id}} {...props} />
 }

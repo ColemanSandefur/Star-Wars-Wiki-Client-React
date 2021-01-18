@@ -5,6 +5,7 @@ import ListSpecies from "./ListSpecies";
 import {
     RouteComponentProps,
 } from "react-router-dom"
+import CategoryPage from "../CategoryPage";
 
 export const PageData: CategoryPageData = {
     name: "species",
@@ -17,38 +18,15 @@ export const PageData: CategoryPageData = {
 
 interface SpeciesPageProps extends RouteComponentProps<{id?: any}>{
     displayedId?: number
-}
+} 
 
-interface SpeciesPageState {
-    
-}
-
-export default class SpeciesPage extends React.Component<SpeciesPageProps, SpeciesPageState> {
-    changePage = (id: number) => {
-        this.props.history.push(`${PageData.basePath}/${id}`);
-    }
-
-    constructor(props: SpeciesPageProps) {
-        super(props)
-
-        this.state = {
-            
-        }
-    }
-
-    render() {
-        let {id} =this.props.match.params
-        if (id !== undefined) {
-            return (
-                <div>
-                    <ShowSpecies id={id} />
-                </div>
-            )
-        }
-        return (
-            <div>
-                <ListSpecies onClick={this.changePage}/>
-            </div>
-        )
-    }
+export default function SpeciesPage(props: SpeciesPageProps) {
+    return <CategoryPage {...props} pageData={PageData} 
+        showCategory={(props, changePageURL, id) => {
+            return <ShowSpecies {...props} changePage={changePageURL} id={id}/>
+        }}
+        listCategory={(props, changePage) => {
+            return <ListSpecies {...{...props, onClick: changePage}} />
+        }}
+    />
 }

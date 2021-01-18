@@ -5,6 +5,7 @@ import { CategoryPageData } from "../WebPage"
 import {
     RouteComponentProps,
 } from "react-router-dom"
+import CategoryPage from "../CategoryPage";
 
 export const PageData: CategoryPageData = {
     name: "people",
@@ -19,37 +20,14 @@ interface PeoplePageProps extends RouteComponentProps<{id?: any}> {
     displayedId?: number
 }
 
-interface PeoplePageState {
-    
-}
-
-export default class PeoplePage extends React.Component<PeoplePageProps, PeoplePageState> {
-    changePage = (id: number) => {
-        this.props.history.push(`${PageData.basePath}/${id}`);
-    }
-
-    constructor(props: PeoplePageProps) {
-        super(props)
-
-        this.state = {
-            
-        }
-    }
-
-    render() {
-        let {id} =this.props.match.params
-        if (id !== undefined) {
-            return (
-                <div>
-                    <ShowPerson id={id} />
-                </div>
-            )
-        }
-        return (
-            <div>
-                <ListPeople onClick={this.changePage}/>
-            </div>
-        )
-    }
+export default function PeoplePage(props: PeoplePageProps) {
+    return <CategoryPage {...props} pageData={PageData} 
+        showCategory={(props, changePageURL, id) => {
+            return <ShowPerson {...props} changePage={changePageURL} id={id}/>
+        }}
+        listCategory={(props, changePage) => {
+            return <ListPeople {...{...props, onClick: changePage}} />
+        }}
+    />
 }
 

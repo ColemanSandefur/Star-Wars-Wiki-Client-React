@@ -31,6 +31,8 @@ export default function ListCategory<D extends ListCategoryDataBase, V>(props: L
         } else if (data.title !== undefined) {
             return <CategoryEntry onClick={props.onClick} id={data.id} text={data.title}/>
         }
+
+        return <CategoryEntry onClick={props.onClick} id={data.id} text={"Unknown"} />
     })
 
     return (

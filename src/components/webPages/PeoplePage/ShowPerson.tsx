@@ -16,23 +16,28 @@ const PERSON_QUERY = gql`
       birth_year
       gender
       homeworld{
-        name
+        name,
+        url,
         id
       }
       films{
-        title
+        title,
+        url,
         id
       }
       species{
-        name
+        name,
+        url,
         id
       }
       vehicles{
-        name
+        name,
+        url,
         id
       }
       starships{
-        name
+        name,
+        url,
         id
       }
       created
@@ -55,22 +60,27 @@ interface GetPersonData extends ShowCategoryProps.CategoryDataBase {
     gender: string,
     homeworld: {
       name: string,
+      url: string,
       id: number
     },
     films: {
       title: string,
+      url: string,
       id: number
     }[],
     species: {
       name: string,
+      url: string,
       id: number
     }[],
     vehicles: {
       name: string,
+      url: string,
       id: number
     }[],
     starships: {
       name: string,
+      url: string,
       id: number
     }[],
     created: string,
@@ -85,6 +95,6 @@ interface GetPersonVars {
 }
 
 
-export default function ShowPerson(props: {id: number}) {
-  return <ShowCategory<GetPersonData, GetPersonVars> query={PERSON_QUERY} showCategoryVars={{id: props.id}} />
+export default function ShowPerson(props: {id: number, changePage: (path: string) => void}) {
+  return <ShowCategory<GetPersonData, GetPersonVars> query={PERSON_QUERY} showCategoryVars={{id: props.id}} {...props} />
 }

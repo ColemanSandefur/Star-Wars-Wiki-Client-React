@@ -19,10 +19,12 @@ const VEHICLE_QUERY = gql`
       vehicle_class,
       pilots{
         name,
+        url,
         id
       },
       films{
         title,
+        url,
         id
       },
       created,
@@ -48,10 +50,12 @@ interface GetVehicleData extends ShowCategoryProps.CategoryDataBase {
       vehicle_class: string,
       pilots: {
         name: string,
+        url: string,
         id: number
       }[],
       films: {
         title: string,
+        url: string,
         id: number
       }[],
       created: string,
@@ -65,6 +69,6 @@ interface GetVehicleVars {
 	id: number
 }
 
-export default function ShowVehicle(props: {id: number}) {
-  return <ShowCategory<GetVehicleData, GetVehicleVars> query={VEHICLE_QUERY} showCategoryVars={{id: props.id}} />
+export default function ShowVehicle(props: {id: number, changePage: (path: string) => void}) {
+  return <ShowCategory<GetVehicleData, GetVehicleVars> query={VEHICLE_QUERY} showCategoryVars={{id: props.id}} {...props} />
 }

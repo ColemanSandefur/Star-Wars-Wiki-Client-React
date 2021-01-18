@@ -1,5 +1,6 @@
 import React from "react";
 import { CategoryPageData } from "../WebPage"
+import CategoryPage from "../CategoryPage"
 import ShowFilm from "./ShowFilm"
 import ListFilms from "./ListFilms";
 import {
@@ -19,36 +20,13 @@ interface FilmPageProps extends RouteComponentProps<{id?: any}>{
     displayedId?: number
 }
 
-interface FilmPageState {
-    
-}
-
-export default class FilmPage extends React.Component<FilmPageProps, FilmPageState> {
-    changePage = (id: number) => {
-        this.props.history.push(`${PageData.basePath}/${id}`);
-    }
-
-    constructor(props: FilmPageProps) {
-        super(props)
-
-        this.state = {
-            
-        }
-    }
-
-    render() {
-        let {id} =this.props.match.params
-        if (id !== undefined) {
-            return (
-                <div>
-                    <ShowFilm id={id} />
-                </div>
-            )
-        }
-        return (
-            <div>
-                <ListFilms onClick={this.changePage}/>
-            </div>
-        )
-    }
+export default function FilmPage(props: FilmPageProps){
+    return <CategoryPage {...props} pageData={PageData} 
+        showCategory={(props, changePageURL, id) => {
+            return <ShowFilm {...props} changePage={changePageURL} id={id}/>
+        }}
+        listCategory={(props, changePage) => {
+            return <ListFilms {...{...props, onClick: changePage}} />
+        }}
+    />
 }

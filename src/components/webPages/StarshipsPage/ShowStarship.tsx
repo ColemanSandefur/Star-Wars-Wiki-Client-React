@@ -21,10 +21,12 @@ const STARSHIP_QUERY = gql`
       starship_class,
       pilots{
         name,
+        url,
         id
       },
       films{
         title,
+        url,
         id
       },
       created,
@@ -52,10 +54,12 @@ interface GetStarshipData extends ShowCategoryProps.CategoryDataBase {
       starship_class: string,
       pilots: {
         name: string,
+        url: string,
         id: number
       }[],
       films: {
         title: string,
+        url: string,
         id: number
       }[],
       created: string,
@@ -69,6 +73,6 @@ interface GetStarshipVars {
 	id: number
 }
 
-export default function ShowStarship(props: {id: number}) {
-  return <ShowCategory<GetStarshipData, GetStarshipVars> query={STARSHIP_QUERY} showCategoryVars={{id: props.id}} />
+export default function ShowStarship(props: {id: number, changePage: (path: string) => void}) {
+  return <ShowCategory<GetStarshipData, GetStarshipVars> query={STARSHIP_QUERY} showCategoryVars={{id: props.id}} {...props} />
 }
