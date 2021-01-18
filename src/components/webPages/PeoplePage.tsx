@@ -2,23 +2,25 @@ import React from "react";
 import "./PeoplePage.scss"
 import ListPeople from "./PeoplePage/ListPeople"
 import ShowPerson from "./PeoplePage/ShowPerson"
+import {
+    RouteComponentProps,
+} from "react-router-dom"
 
 interface PeoplePageProps {
-
-}
-
-interface PeoplePageState {
     displayedId?: number
 }
 
-export default class PeoplePage extends React.Component<PeoplePageProps, PeoplePageState> {
+interface PeoplePageState {
+    
+}
+
+export default class PeoplePage extends React.Component<PeoplePageProps & RouteComponentProps<{id?: any}>, PeoplePageState> {
     changePage = (id: number) => {
-        this.setState({
-            displayedId: id
-        })
+        this.props.history.push(`/people/${id}`)
+        
     }
 
-    constructor(props: PeoplePageProps) {
+    constructor(props: PeoplePageProps & RouteComponentProps<{id?: any}>) {
         super(props)
 
         this.state = {
@@ -27,16 +29,17 @@ export default class PeoplePage extends React.Component<PeoplePageProps, PeopleP
     }
 
     render() {
-        if (this.state.displayedId !== undefined) {
+        let {id} =this.props.match.params
+        if (id !== undefined) {
             return (
                 <div>
-                    <ShowPerson id={this.state.displayedId} />
+                    <ShowPerson id={id} />
                 </div>
             )
         }
         return (
             <div>
-                <ListPeople id={this.state.displayedId} onClick={this.changePage}/>
+                <ListPeople id={id} onClick={this.changePage}/>
             </div>
         )
     }

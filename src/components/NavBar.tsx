@@ -20,23 +20,31 @@ interface NavBarProps {
 }
 
 interface NavBarState {
-  categories: string[]
+  categories: NavEntryProps[]
 }
 
+//NavBar will be displayed on every page,
+//just add your links to 'categories' and it will show up on the bar
 class NavBar extends React.Component<NavBarProps, NavBarState> {
   constructor(props: NavBarProps) {
     super(props);
 
     this.state = {
-      categories: ["sup", "yeah"]
+      categories: [
+        {
+          text: "people",
+          link: "/people"
+        },
+      ]
     }
   }
+
   render() {
     let categories = this.state.categories.slice();
 
     let data = categories.map((value, index) => {
       return (
-        <NavEntry link="" text={value} key={index}/>
+        <NavEntry link={value.link} text={value.text} key={index}/>
       );
     })
 
@@ -44,13 +52,7 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
       <div className="Nav-Bar">
         {data}
       </div>
-      
-      
     );
-  }
-
-  componentDidMount() {
-    
   }
 }
 

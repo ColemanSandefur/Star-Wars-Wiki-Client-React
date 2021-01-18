@@ -1,18 +1,22 @@
 import React from "react";
 import PeoplePage from "./PeoplePage"
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    RouteComponentProps
+} from "react-router-dom";
 
 export interface PageManager {
     pages: {
         [relativeLink: string]: PageData
     },
-    currentPage: string, //key for pages
-    changePage: (relativeLink: string) => void,
     addPage: (relativeLink: string, pageData: PageData) => void
 }
 
 export interface PageData {
     name: string,
-    page: JSX.Element
+    render: (routeProps: RouteComponentProps<any>) => JSX.Element
 }
 
 interface WebPagesProps {
@@ -23,31 +27,33 @@ class WebPages extends React.Component<WebPagesProps> {
     constructor(props: WebPagesProps) {
         super(props);
 
-        this.props.pageManager.addPage("/people", {
-            name: "people",
-            page: <PeoplePage />
-        })
-
-        this.props.pageManager.changePage("/people");
+        this.props.pageManager.addPage("/people/:id?", {
+            name: "person",
+            render: (props) => {
+                return <PeoplePage {...props}/>
+            }
+        });
     }
     
     render() {
-        let allPages = this.props.pageManager.pages;
-        let currentPage = this.props.pageManager.currentPage;
+        let pages = this.props.pageManager.pages;
+        let routers = [];
 
-        if (currentPage === "") {
-            return (<div></div>)
+        for (let page in pages) {
+            let pageData: PageData = Reflect.get(pages, page);
+            
+            routers.push((
+                <Route path={page} render={pageData.render} key={routers.length} />
+            ))
         }
 
-        if (allPages[currentPage] === undefined){
-            return (<div>error!</div>)
-        }
-
-        return(
-            <div>
-                {allPages[currentPage].page}
-            </div>
-        )
+        return (
+            <Router>
+                <Switch>
+                    {routers}
+                </Switch>
+            </Router>
+        );
     }
 }
 

@@ -18,8 +18,6 @@ class App extends React.Component<{}, AppState> {
     this.setState({
       pageManager: {
         pages: pages,
-        currentPage: this.state.pageManager.currentPage,
-        changePage: this.state.pageManager.changePage,
         addPage: this.state.pageManager.addPage
       }
     })
@@ -29,8 +27,6 @@ class App extends React.Component<{}, AppState> {
     this.setState({
       pageManager: {
         pages: this.state.pageManager.pages,
-        currentPage: relativeLink,
-        changePage: this.state.pageManager.changePage,
         addPage: this.state.pageManager.addPage
       }
     })
@@ -42,8 +38,6 @@ class App extends React.Component<{}, AppState> {
     this.state = {
       pageManager: {
         pages: {},
-        currentPage: "",
-        changePage: this.changePage,
         addPage: this.addPage,
       }
     }
