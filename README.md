@@ -1,3 +1,5 @@
+### Go to https://swapi-react-test.netlify.app/ to see the live build
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
