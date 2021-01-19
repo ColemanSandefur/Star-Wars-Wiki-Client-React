@@ -27,7 +27,7 @@ export default function ListCategory<D extends ListCategoryDataBase, V>(props: L
 
     const formatted = Reflect.get(data, Object.keys(data)[0]).map((data: Data) => {
         if (data.name !== undefined) {
-            return <CategoryEntry onClick={props.onClick} id={data.id} text={data.name}/>
+            return <CategoryEntry key={data.id} onClick={props.onClick} id={data.id} text={data.name}/>
         } else if (data.title !== undefined) {
             return <CategoryEntry onClick={props.onClick} id={data.id} text={data.title}/>
         }
@@ -43,5 +43,5 @@ export default function ListCategory<D extends ListCategoryDataBase, V>(props: L
 }
 
 function CategoryEntry(props: {onClick: (id: number) => void, id: number, text: string}) {
-    return <li key={`${props.id}`}><span onClick={() => props.onClick(props.id)}>{props.text}</span></li>
+    return <li><span onClick={() => props.onClick(props.id)}>{props.text}</span></li>
 }

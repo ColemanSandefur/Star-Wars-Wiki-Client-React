@@ -1,11 +1,11 @@
-$font-size: 2rem;
+$font-size: calc(12px + 2vw);
 $entry-padding: .5rem;
 
 .Nav-Bar {
     width: 100%;
     box-sizing: border-box;
     background-color: #000000aa;
-    height: calc($font-size + (2 * $entry-padding));
+    height: calc(#{$font-size} + (2 * #{$entry-padding}));
     font-size: $font-size;
 }
 
