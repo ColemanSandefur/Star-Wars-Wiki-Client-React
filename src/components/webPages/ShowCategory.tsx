@@ -52,7 +52,7 @@ export default function ShowCategory<D extends CategoryDataBase, V>(props: ShowC
   }
   
   return (
-    <div>{categories}</div>
+    <div className="Show-Category">{categories}</div>
   )
 }
 

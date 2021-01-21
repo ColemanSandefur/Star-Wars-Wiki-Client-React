@@ -1,16 +1,32 @@
 
 .All-Categories {
-    padding: 0;
+    padding: 2rem calc(2vmin * 8);
+    background-color: #070707;
+    
+
     li {
         
-        margin: 1rem;
+        &:first-child {
+            margin-top: 0;
+        }
+        &:last-child {
+            margin-bottom: 0;
+        }
+        
+        margin: 2rem 0;
 
         span {
-            background-color: #00000055;
-            padding: .25rem;
+            padding: 1rem;
             border-radius: 10px;
             cursor: pointer;
             display: inline-block;
+            box-shadow: 1px 1px 1px black;
+            background-color: #0b0b0b;
         }
     }
+}
+
+html {
+    background-color: #070707;
+    background-image: none;
 }

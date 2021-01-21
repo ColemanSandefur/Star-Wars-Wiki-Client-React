@@ -1,18 +1,42 @@
-$font-size: calc(12px + 2vw);
+$font-size: calc(2vmin);
 $entry-padding: .5rem;
+$side-padding: calc(#{$font-size} * 8);
 
 .Nav-Bar {
     width: 100%;
     box-sizing: border-box;
-    background-color: #000000aa;
-    height: calc(#{$font-size} + (2 * #{$entry-padding}));
+    background-color: #00000000;
     font-size: $font-size;
-}
+    padding-left: $side-padding;
+    position: sticky;
+    top: 0;
+    background-image: url("../../country-quilt-dark-2.png");
 
-.Nav-Entry {
+    a {
         color: white;
         text-decoration: none;
-        padding: .5rem
+        padding: .5rem;
 
-    // padding: .5rem;
+        &.Title {
+            font-size: calc(#{$font-size} + .5rem);
+            padding: 0;
+            padding-right: .5rem;
+            padding-right: calc(#{$side-padding} / 2);
+            color: #69aeef;
+            font-weight: bold;
+        }
+
+        line-height: calc(#{$font-size} * 3);
+        vertical-align: middle;
+    }
+}
+
+.Title {
+    font-size: calc(#{$font-size} + .5rem);
+    display: inline-block;
+    padding: .5rem;
+    margin: 0rem;
+    padding-right: 4rem;
+    color: #69aeef;
+    font-weight: bold;
 }

@@ -41,6 +41,7 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
 
     return (
       <div className="Nav-Bar">
+        <a key="title" href={"/"} className="Title">Star Wars Wiki</a>
         {data}
       </div>
     );

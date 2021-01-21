@@ -1,15 +1,23 @@
 //all Show(x).tsx will use this styling (ex: ShowPerson.tsx, ShowPlanet.tsx, etc.)
 
 div.Category {
-    background-color: #00000055;
+    &:first-child {
+        margin-top: 0;
+    }
+    &:last-child {
+        margin-bottom: 0;
+    }
+    background-color: #0b0b0b;
     box-sizing: border-box;
-    margin: 2rem;
+    box-shadow: 1px 1px 1px black;
+    margin: 2rem 0;
     border-radius: 10px;
     padding: 1rem;
 
     h3 {
         margin: 0;
         margin-bottom: 2rem;
+        font-weight: bold;
     }
 
     ul {
@@ -25,4 +33,18 @@ div.Category {
             }
         }
     }
+}
+
+div.Show-Category {
+    background-color: #070707;
+
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+
+    padding: 2rem calc(2vmin * 8);
+}
+
+html {
+    background-color: #070707;
+    background-image: none;
 }

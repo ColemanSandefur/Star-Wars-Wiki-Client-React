@@ -13,6 +13,7 @@ import * as FilmsPage from "./FlimsPage/FilmsPage";
 import * as SpeciesPage from "./SpeciesPage/SpeciesPage";
 import * as VehiclesPage from "./VehiclesPage/VehiclesPage";
 import * as StarshipsPage from "./StarshipsPage/StarshipsPage";
+import * as HomePage from "./HomePage/HomePage";
 
 export interface PageData {
     name: string,
@@ -64,6 +65,7 @@ class WebPages extends React.Component<WebPagesProps> {
             <Router>
                 <Switch>
                     {routers}
+                    <Route path={HomePage.PageData.path} render={HomePage.PageData.render} key={"HomePage"} />
                 </Switch>
             </Router>
         );
